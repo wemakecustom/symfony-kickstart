@@ -1,0 +1,8 @@
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+    # Use Mopa Bootstrap to generate forms
+    # https://github.com/phiamo/MopaBootstrapBundle/blob/master/Resources/doc/3-form-extension-templates.md
+    form:
+       resources:
+          - 'WMCCommonBundle:Form:fields.html.twig'

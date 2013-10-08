@@ -1,0 +1,7 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: drop-in-config.php }
+
+# Nothing to see here except imports, move along folks...
+# Altough, you may be interested in app/config/conf.d

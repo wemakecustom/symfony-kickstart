@@ -1,0 +1,9 @@
+# Use this file only if you intend to use doctrine
+doctrine:
+    dbal:
+        mapping_types:
+            enum: string
+    orm:
+        auto_generate_proxy_classes: %kernel.debug%
+        auto_mapping: true
+        naming_strategy: wmc.doctrine.orm.naming_strategy

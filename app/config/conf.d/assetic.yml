@@ -1,0 +1,17 @@
+assetic:
+    debug:          %kernel.debug%
+    use_controller: %kernel.debug%
+    
+    # Web directory, default shown web
+    read_from:      %web_directory%
+    write_to:       %web_directory%
+
+    # Java path, defaults shown below
+    # java: /usr/bin/java
+
+    filters:
+        cssrewrite:
+            apply_to: '\.(css|less)$'
+        lessphp:
+            file: %kernel.root_dir%/../vendor/leafo/lessphp/lessc.inc.php
+            apply_to: "\.less$"

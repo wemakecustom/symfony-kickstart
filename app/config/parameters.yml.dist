@@ -1,0 +1,16 @@
+parameters:
+    mailer_transport:  smtp
+    mailer_host:       127.0.0.1
+    mailer_user:       ~
+    mailer_password:   ~
+
+    send_mails_from:   noreply@localhost
+    send_mails_from_name: WeMakeCustom.com
+    delivery_address_dev: nobody@localhost
+
+    locale:            fr_CA
+    secret:            ThisTokenIsNotSoSecretChangeIt
+
+    web_directory:    %kernel.root_dir%/../htdocs
+
+    google_analytics_tracker: ~
