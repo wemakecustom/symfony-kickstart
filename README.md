@@ -80,7 +80,7 @@ simply here for reference.
 
 #### Doctrine Extensions
 
-  * `stof/doctrine-extensions-bundle:*`
+  * `stof/doctrine-extensions-bundle:~1.1@dev`
 
   * `gedmo/doctrine-extensions`
 
