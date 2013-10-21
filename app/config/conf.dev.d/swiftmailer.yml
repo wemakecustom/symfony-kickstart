@@ -1,0 +1,2 @@
+swiftmailer:
+   delivery_address: %delivery_address_dev%

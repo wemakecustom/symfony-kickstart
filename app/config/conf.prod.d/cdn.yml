@@ -1,0 +1,5 @@
+# framework:
+#     templating:
+#         assets_base_urls:
+#             http:
+#                 - http://cdn.example.com
