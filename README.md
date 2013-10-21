@@ -7,7 +7,7 @@
      create-project symfony/framework-standard-edition path/to/install`)
   2. Delete the AcmeBundle (and be done with it, CF symfony-standard README, you should completely disable security instead of following their (faulty) protocol)
   3. Add the drop-in config importer (http://gitlab.wemakecustom.com/symfony2-bundles/symfony-skeleton/blob/master/app/config/drop-in-config.php)
-  4. Update `parameters.yml.dist` to use our default one (http://gitlab.wemakecustom.com/symfony2-bundles/symfony-skeleton/blob/master/app/config/parameters.dist.yml)
+  4. Update `parameters.yml.dist` to use our default one (http://gitlab.wemakecustom.com/symfony2-bundles/symfony-skeleton/blob/master/app/config/parameters.yml.dist)
   5. Update `composer.json` config to use our default options (CF below)
   6. Update your `composer.json` to use [WMC's gitlab](http://gitlab-composer.stage.wemakecustom.com/)
      as a [source of repositories](https://github.com/wemakecustom/gitlab-composer)
