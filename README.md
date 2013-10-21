@@ -10,16 +10,16 @@
   4. Update `parameters.yml.dist` to use our default one (http://gitlab.wemakecustom.com/symfony2-bundles/symfony-skeleton/blob/master/app/config/parameters.dist.yml)
   5. Update `composer.json` config to use our default options (CF below)
   6. Update your `composer.json` to use [WMC's gitlab](http://gitlab-composer.stage.wemakecustom.com/)
-  7  as a [source of repositories](https://github.com/wemakecustom/gitlab-composer)
-  8. Install [wemakecustom/symfony-app-loader:~1.0@dev](https://github.com/wemakecustom/symfony-app-loader)
-  9. Delete `htdocs/config.php`
-  10. Install strongly recommended bundles (you will almost always need them anyway):
+     as a [source of repositories](https://github.com/wemakecustom/gitlab-composer)
+  7. Install [wemakecustom/symfony-app-loader:~1.0@dev](https://github.com/wemakecustom/symfony-app-loader)
+  8. Delete `htdocs/config.php`
+  9. Install strongly recommended bundles (you will almost always need them anyway):
      * [symfony2-bundles/wmccommonbundle:*](http://gitlab.wemakecustom.com/symfony2-bundles/wmccommonbundle)
      * [sp/bower-bundle:dev-master](https://github.com/Spea/SpBowerBundle)
      * [jms/di-extra-bundle:1.x](https://github.com/schmittjoh/JMSDiExtraBundle)
      * [leafo/lessphp:*](https://github.com/leafo/lessphp)
-  11. Create the `confs` directory for Hosting environment specific configs (CF below).
-  12. Split down config.yml it will need to be rewritten anyway (http://gitlab.wemakecustom.com/symfony2-bundles/symfony-skeleton/blob/master/app/config/config.yml and http://gitlab.wemakecustom.com/symfony2-bundles/symfony-skeleton/tree/master/app/config/conf.d)
+  10. Create the `confs` directory for Hosting environment specific configs (CF below).
+  11. Split down config.yml it will need to be rewritten anyway (http://gitlab.wemakecustom.com/symfony2-bundles/symfony-skeleton/blob/master/app/config/config.yml and http://gitlab.wemakecustom.com/symfony2-bundles/symfony-skeleton/tree/master/app/config/conf.d)
 
 ## composer.json configuration
 
