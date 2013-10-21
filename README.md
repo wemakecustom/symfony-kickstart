@@ -6,14 +6,14 @@
      https://github.com/symfony/symfony-standard edition (`composer.phar
      create-project symfony/framework-standard-edition path/to/install`)
   2. Delete the AcmeBundle (and be done with it, CF symfony-standard README, you should completely disable security instead of following their (faulty) protocol)
-  3. Add the drop-in config importer (http://gitlab.wemakecustom.com/symfony2-bundles/symfony-skeleton/blob/master/app/config/config.php)
+  3. Add the drop-in config importer (app/config/config.php)
   4. Update `AppKernel::registerContainerConfiguration` in `app/AppKernel.php` to `$loader->load(__DIR__.'/config/config.php');`.
   5. Delete `config*.yml`, copy all `app/conf*.d` and edit to your needs.
-  6. Update `parameters.yml.dist` to use our default one (http://gitlab.wemakecustom.com/symfony2-bundles/symfony-skeleton/blob/master/app/config/parameters.yml.dist)
+  6. Update `parameters.yml.dist` to use our default one (app/config/parameters.yml.dist)
   7. Update `composer.json` config to use our default options (CF below)
   8. Update your `composer.json` to use [WMC's gitlab](http://gitlab-composer.stage.wemakecustom.com/)
      as a [source of repositories](https://github.com/wemakecustom/gitlab-composer)
-  9. Update `.gitignore` to use our default one  (http://gitlab.wemakecustom.com/symfony2-bundles/symfony-skeleton/blob/master/.gitignore)
+  9. Update `.gitignore` to use our default one  (.gitignore)
   10. Install [wemakecustom/symfony-app-loader:~1.0@dev](https://github.com/wemakecustom/symfony-app-loader)
   11. Delete `htdocs/config.php`
   12. Install strongly recommended bundles (you will almost always need them anyway):
@@ -48,12 +48,12 @@ Hosting environment specific configurations are used to achieve the same goal as
 automatically generated. We therefore need them to be included in symfony via a
 specific worflow.
 
-Checkout the `confs` directory: http://gitlab.wemakecustom.com/symfony2-bundles/symfony-skeleton/tree/master/confs
+[Checkout the `confs` directory](confs):
 
 An example for a MySQL database (`doctrine/orm` conf) is available:
 
-  * http://gitlab.wemakecustom.com/symfony2-bundles/symfony-skeleton/blob/master/app/config/conf.d/database.php
-  * http://gitlab.wemakecustom.com/symfony2-bundles/symfony-skeleton/blob/master/confs/samples/database.ini
+  * app/config/conf.d/database.php
+  * confs/samples/database.ini
 
 ## Commonly used bundles
 
