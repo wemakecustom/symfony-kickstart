@@ -11,8 +11,6 @@
  */
 
 $this->import('parameters.yml');
-$this->import('security.yml');
-
 
 $directories = array_filter(array(
     __DIR__.'/conf.d',
