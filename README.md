@@ -4,7 +4,7 @@
 
   1. First create the project using the
      https://github.com/symfony/symfony-standard edition (`composer.phar
-     create-project symfony/framework-standard-edition path/to/install 2.3`)
+     create-project symfony/framework-standard-edition path/to/install 2.4`)
   2. Delete the AcmeBundle (and be done with it, See symfony-standard README,
      you should completely disable security instead of following their (faulty)
      protocol)
