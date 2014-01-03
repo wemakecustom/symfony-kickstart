@@ -19,7 +19,7 @@
      gitlab](http://gitlab-composer.stage.wemakecustom.com/) as a [source of
      repositories](https://github.com/wemakecustom/gitlab-composer)
   9. Update `.gitignore` to use our [default one](.gitignore)
-  10. Install [wemakecustom/symfony-app-loader:~1.0@dev](https://github.com/wemakecustom/symfony-app-loader)
+  10. Install [wemakecustom/symfony-app-loader:~1.0](https://github.com/wemakecustom/symfony-app-loader)
   11. Delete `htdocs/config.php`
   12. Install strongly recommended bundles (you will almost always need them
       anyway):
