@@ -1,14 +1,3 @@
 /sublime-project.sublime-workspace
-/htdocs/bundles/
-/htdocs/uploads/
-/htdocs/assets/
-/htdocs/components/
-/app/bootstrap.php.cache
-/app/cache/*
-/app/config/app_loader.ini
-/app/config/parameters.yml
-/app/logs/*
-/build/
 /vendor/
-/bin/
 /composer.phar

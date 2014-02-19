@@ -1,0 +1,70 @@
+#!/bin/bash
+
+script_dir="$(cd "$(dirname "${BASH_SOURCE}")" ; pwd -P)"/"$(basename "${BASH_SOURCE}")"
+while [ -L "${script_dir}" ] ; do script_dir="$(dirname "${script_dir}")/$(readlink "${script_dir}")"; done
+script_dir="$(dirname "${script_dir}")"
+
+symfony_install_dir="${1:-./symfony-kickstart}"
+
+if [ -d "${symfony_install_dir}" ]
+then 
+	echo "The directory ${symfony_install_dir} already exists"
+	exit 0
+fi
+
+# Download and install Symfony
+composer.phar -n create-project symfony/framework-standard-edition "${symfony_install_dir}/" 2.4
+
+# Cleanup demo dundle
+echo -n 'Cleanup demo bundle...'
+rm -rf "${symfony_install_dir}/web/bundles/acmedemo" "${symfony_install_dir}/src/Acme"-e 
+sed -i -e 's/\$bundles\[\] = new Acme\\DemoBundle\\AcmeDemoBundle();/\/\/\$bundles\[\]-e  = new Acme\\DemoBundle\\AcmeDemoBundle();/g;' "${symfony_install_dir}/app/AppKernel.php"
+sed -i -e "$( grep -n 'AcmeDemoBundle' "${symfony_install_dir}/app/AppKernel.php" | cut -d ':' -f 1)d" "${symfony_install_dir}/app/AppKernel.php"
+data="$(grep -n '# AcmeDemoBundle routes' "${symfony_install_dir}/app/config/routing_dev.yml")"
+
+if [ -n "${data}" ]
+then
+	tmp_file="$(mktemp)"
+	head -"$(( $(echo "${data}" | cut -d ':' -f 1) - 1 ))" "${symfony_install_dir}/app/config/routing_dev.yml" > "${tmp_file}"
+	mv "${tmp_file}" "${symfony_install_dir}/app/config/routing_dev.yml"
+fi
+echo ' done'
+
+# Copy bootstrap files
+rsync -r "${script_dir}/../dist/" "${symfony_install_dir}"
+
+# A bit of preparation
+cd "${symfony_install_dir}"
+mv web htdocs
+
+# Update AppKernel to use AppLoader
+echo -n 'Update AppKernel to use AppLoader...'
+sed -i -e "s/\$loader->load(__DIR__.'\/config\/config_'.\$this->getEnvironment().'.yml');/\$loader->load(__DIR__.'\/config\/config.php');/g;" app/AppKernel.php
+echo ' done'
+
+# Cleanup unused files
+echo -n 'Cleanup unused files...'
+cp confs/samples/database.ini confs/database.ini
+rm -f app/config/conf*.yml
+echo ' done'
+
+# Update composer.json with some default values
+# Update composer.json with WMC's GitLab repo
+echo -n 'Update composer.json...'
+php "${script_dir}/symfony-kickstart-update-composer.json.php"
+echo ' done'
+
+# Install AppLoader
+composer.phar -n require "wemakecustom/symfony-app-loader:~1.0"
+cp vendor/wemakecustom/symfony-app-loader/app/console app/console
+cp vendor/wemakecustom/symfony-app-loader/web/app.php htdocs/app.php
+
+# More cleanup
+rm -f htdcocs/config.php
+
+# Install extra bundles
+composer.phar -n require "symfony2-bundles/wmccommonbundle:*" sp/bower-bundle:dev-master jms/di-extra-bundle:1.x "leafo/lessphp:*" 
+
+composer.phar -n update
+
+[ -z "${1}" ] && echo "You can now rename and move the ${symfony_install_dir} to fit your needs!"
