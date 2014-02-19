@@ -1,0 +1,21 @@
+{
+    "name": "wemakecustom/symfony-bootstrap",
+    "description": "Script and files to kickstart a new symfony project",
+    "homepage": "http://wemakecustom.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christophe Faribault",
+            "email": "christophe@wemakecustom.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4"
+    },
+    "bin": [
+        "bin/symfony-kickstart"
+    ],
+    "config": {
+        "bin-dir": "bin"
+    }
+}
