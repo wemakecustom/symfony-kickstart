@@ -37,7 +37,7 @@ then
 fi
 echo ' done'
 
-# Copy bootstrap files
+# Copy kickstart files
 rsync -r "${script_dir}/../dist/" "${symfony_install_dir}"
 
 # A bit of preparation
