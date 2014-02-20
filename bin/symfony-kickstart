@@ -7,7 +7,7 @@ script_dir="$(dirname "${script_dir}")"
 symfony_install_dir="${1:-./symfony-kickstart}"
 
 if [ -d "${symfony_install_dir}" ]
-then 
+then
 	echo "The directory ${symfony_install_dir} already exists"
 	exit 0
 fi
@@ -17,7 +17,7 @@ composer.phar -n create-project symfony/framework-standard-edition "${symfony_in
 
 # Cleanup demo dundle
 echo -n 'Cleanup demo bundle...'
-rm -rf "${symfony_install_dir}/web/bundles/acmedemo" "${symfony_install_dir}/src/Acme"-e 
+rm -rf "${symfony_install_dir}/web/bundles/acmedemo" "${symfony_install_dir}/src/Acme"
 sed -i -e 's/\$bundles\[\] = new Acme\\DemoBundle\\AcmeDemoBundle();/\/\/\$bundles\[\]-e  = new Acme\\DemoBundle\\AcmeDemoBundle();/g;' "${symfony_install_dir}/app/AppKernel.php"
 sed -i -e "$( grep -n 'AcmeDemoBundle' "${symfony_install_dir}/app/AppKernel.php" | cut -d ':' -f 1)d" "${symfony_install_dir}/app/AppKernel.php"
 data="$(grep -n '# AcmeDemoBundle routes' "${symfony_install_dir}/app/config/routing_dev.yml")"
@@ -51,7 +51,7 @@ echo ' done'
 # Update composer.json with some default values
 # Update composer.json with WMC's GitLab repo
 echo -n 'Update composer.json...'
-php "${script_dir}/symfony-kickstart-update-composer.json.php"
+php "${script_dir}/symfony-kickstart-update-composer.json.php" "${symfony_install_dir}"
 echo ' done'
 
 # Install AppLoader
