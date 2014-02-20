@@ -4,7 +4,11 @@ script_dir="$(cd "$(dirname "${BASH_SOURCE}")" ; pwd -P)"/"$(basename "${BASH_SO
 while [ -L "${script_dir}" ] ; do script_dir="$(dirname "${script_dir}")/$(readlink "${script_dir}")"; done
 script_dir="$(dirname "${script_dir}")"
 
-symfony_install_dir="${1:-./symfony-kickstart}"
+symfony_install_dir="${1:-symfony-kickstart}"
+if [[ "${symfony_install_dir}" != /* ]]
+	then
+	symfony_install_dir="$(pwd)/${symfony_install_dir}"
+fi
 
 if [ -d "${symfony_install_dir}" ]
 then
