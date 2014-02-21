@@ -5,10 +5,13 @@ while [ -L "${script_dir}" ] ; do script_dir="$(dirname "${script_dir}")/$(readl
 script_dir="$(dirname "${script_dir}")"
 
 symfony_install_dir="${1:-symfony-kickstart}"
-if [[ "${symfony_install_dir}" != /* ]]
-	then
+
+if [[ "${symfony_install_dir##/}" = "${symfony_install_dir}" ]]
+then
 	symfony_install_dir="$(pwd)/${symfony_install_dir}"
 fi
+
+symfony_install_dir="${symfony_install_dir%%/}"
 
 if [ -d "${symfony_install_dir}" ]
 then
@@ -34,7 +37,7 @@ then
 fi
 echo ' done'
 
-# Copy bootstrap files
+# Copy kickstart files
 rsync -r "${script_dir}/../dist/" "${symfony_install_dir}"
 
 # A bit of preparation
