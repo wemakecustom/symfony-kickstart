@@ -3,11 +3,7 @@
 ## Setup
 
 1. Clone this project anywhere outside your web folder. This package will be used to create new Symfony projects and does not need to be cloned every time.
-<<<<<<< HEAD
 2. Run the "symfony-kickstart" script from the "bin" directory and give you new project's path as the first argument. The new project's directory must NOT exist prior to running the script.
-=======
-2. Run the "symfony-kickstart" script from the "bin" directory and give you new project's path as the first argument. The new project's directory will be created if it doesn't exist.
->>>>>>> ae204c2f112f2354b7bee6586e71c48d6e49f540
 3. Start building your new project!
 
 ## Hosting environment specific configuration
