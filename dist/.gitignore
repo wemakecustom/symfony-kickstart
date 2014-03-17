@@ -12,3 +12,4 @@
 /vendor/
 /bin/
 /composer.phar
+/src/**/*Bundle/Resources/public/components/cache
