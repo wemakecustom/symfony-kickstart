@@ -51,7 +51,6 @@ echo ' done'
 
 # Cleanup unused files
 echo -n 'Cleanup unused files...'
-cp confs/samples/database.ini confs/database.ini
 rm -f app/config/conf*.yml
 echo ' done'
 
