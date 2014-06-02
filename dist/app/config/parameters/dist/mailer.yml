@@ -1,0 +1,8 @@
+parameters:
+    mailer_transport: mail
+    mailer_host: null
+    mailer_user: null
+    mailer_password: null
+    send_mails_from: noreply@localhost
+    send_mails_from_name: WeMakeCustom.com
+    delivery_address_dev: nobody@localhost

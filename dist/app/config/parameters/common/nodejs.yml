@@ -1,0 +1,3 @@
+parameters:
+    node_exec: /usr/bin/node
+    node_path: /usr/lib/node_modules

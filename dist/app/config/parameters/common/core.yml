@@ -1,0 +1,2 @@
+parameters:
+    web_directory:    %kernel.root_dir%/../htdocs

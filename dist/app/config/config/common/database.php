@@ -1,6 +1,6 @@
 <?php
 
-$ini_file = dirname(dirname(dirname(__DIR__))) . '/confs/database.ini';
+$ini_file = $this->container->getParameter('kernel.root_dir') . '/../confs/database.ini';
 
 $this->container->addResource(new Symfony\Component\Config\Resource\FileResource($ini_file));
 

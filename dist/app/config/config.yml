@@ -1,0 +1,4 @@
+imports:
+    - { resource: 'parameters/common/' }
+    - { resource: 'parameters/local/' }
+    - { resource: 'config/common/' }

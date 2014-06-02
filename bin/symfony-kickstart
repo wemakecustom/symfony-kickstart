@@ -19,40 +19,32 @@ then
 	exit 0
 fi
 
+# Detect composer executable name
+COMPOSER="composer.phar"
+
+which $COMPOSER >/dev/null 2>/dev/null || COMPOSER="composer"
+if ! which $COMPOSER >/dev/null 2>/dev/null; then
+    echo "Composer missing" >&2
+    exit 1
+fi
+
 # Download and install Symfony
-composer.phar -n create-project symfony/framework-standard-edition "${symfony_install_dir}/" 2.4
+$COMPOSER -n create-project symfony/framework-standard-edition "${symfony_install_dir}/" 2.4
 
 # Cleanup demo dundle
 echo -n 'Cleanup demo bundle...'
 rm -rf "${symfony_install_dir}/web/bundles/acmedemo" "${symfony_install_dir}/src/Acme"
-sed -i -e 's/\$bundles\[\] = new Acme\\DemoBundle\\AcmeDemoBundle();/\/\/\$bundles\[\]-e  = new Acme\\DemoBundle\\AcmeDemoBundle();/g;' "${symfony_install_dir}/app/AppKernel.php"
-sed -i -e "$( grep -n 'AcmeDemoBundle' "${symfony_install_dir}/app/AppKernel.php" | cut -d ':' -f 1)d" "${symfony_install_dir}/app/AppKernel.php"
-data="$(grep -n '# AcmeDemoBundle routes' "${symfony_install_dir}/app/config/routing_dev.yml")"
 
-if [ -n "${data}" ]
-then
-	tmp_file="$(mktemp)"
-	head -"$(( $(echo "${data}" | cut -d ':' -f 1) - 1 ))" "${symfony_install_dir}/app/config/routing_dev.yml" > "${tmp_file}"
-	mv "${tmp_file}" "${symfony_install_dir}/app/config/routing_dev.yml"
-fi
-echo ' done'
+# Cleanup unused files
+echo 'Cleanup unused files...'
+rm -fv $symfony_install_dir/app/config/*.yml $symfony_install_dir/app/config/parameters.yml.dist
 
 # Copy kickstart files
-rsync -r "${script_dir}/../dist/" "${symfony_install_dir}"
+rsync -av "${script_dir}/../dist/" "${symfony_install_dir}"
 
 # A bit of preparation
 cd "${symfony_install_dir}"
 mv web htdocs
-
-# Update AppKernel to use AppLoader
-echo -n 'Update AppKernel to use AppLoader...'
-sed -i -e "s/\$loader->load(__DIR__.'\/config\/config_'.\$this->getEnvironment().'.yml');/\$loader->load(__DIR__.'\/config\/config.php');/g;" app/AppKernel.php
-echo ' done'
-
-# Cleanup unused files
-echo -n 'Cleanup unused files...'
-rm -f app/config/conf*.yml
-echo ' done'
 
 # Update composer.json with some default values
 # Update composer.json with WMC's GitLab repo
@@ -60,17 +52,14 @@ echo -n 'Update composer.json...'
 php "${script_dir}/symfony-kickstart-update-composer.json.php" "${symfony_install_dir}"
 echo ' done'
 
+$COMPOSER update
+
 # Install AppLoader
-composer.phar -n require "wemakecustom/symfony-app-loader:~1.0"
 cp vendor/wemakecustom/symfony-app-loader/app/console app/console
 cp vendor/wemakecustom/symfony-app-loader/web/app.php htdocs/app.php
+cp vendor/wemakecustom/symfony-app-loader/web/app_dev.php htdocs/app_dev.php
 
 # More cleanup
-rm -f htdcocs/config.php
-
-# Install extra bundles
-composer.phar -n require "symfony2-bundles/wmccommonbundle:*" sp/bower-bundle:dev-master jms/di-extra-bundle:1.x "leafo/lessphp:*" 
-
-composer.phar -n update
+rm -f htdocs/config.php
 
 [ -z "${1}" ] && echo "You can now rename and move the ${symfony_install_dir} to fit your needs!"

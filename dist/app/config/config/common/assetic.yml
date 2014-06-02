@@ -10,8 +10,9 @@ assetic:
     # java: /usr/bin/java
 
     filters:
+        less:
+            node: %node_exec%
+            node_paths: [%node_path%]
+            apply_to: "\.less$"
         cssrewrite:
             apply_to: '\.(css|less)$'
-        lessphp:
-            file: %kernel.root_dir%/../vendor/leafo/lessphp/lessc.inc.php
-            apply_to: "\.less$"

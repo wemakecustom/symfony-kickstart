@@ -6,3 +6,4 @@ doctrine:
     orm:
         auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true
+        naming_strategy: wmc.doctrine.orm.naming_strategy
