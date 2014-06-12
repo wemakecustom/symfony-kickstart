@@ -1,6 +1,8 @@
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/app_loader.ini
+/app/config/parameters.yml
+/app/config/parameters/local
 /app/logs/*
 /bin
 /build
