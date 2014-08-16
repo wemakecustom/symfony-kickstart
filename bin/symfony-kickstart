@@ -40,7 +40,7 @@ echo 'Cleanup unused files...'
 rm -fv $symfony_install_dir/app/config/*.yml $symfony_install_dir/app/config/parameters.yml.dist
 
 # Copy kickstart files
-rsync -av "${script_dir}/../dist/" "${symfony_install_dir}"
+cp -r "${script_dir}/../dist/*" "${symfony_install_dir}"
 
 # A bit of preparation
 cd "${symfony_install_dir}"
