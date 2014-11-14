@@ -1,5 +1,15 @@
 <?php
-$json_path = "${argv[1]}/composer.json";
+
+$project = getcwd();
+if (isset($argv[1])) {
+    $project = $argv[1];
+}
+
+$json_path = "${project}/composer.json";
+if (!is_file($json_path)) {
+    throw new \RuntimeException('Argument 1 must be the directory of the project to alter');
+}
+
 $json = file_get_contents($json_path);
 $data = json_decode($json,true);
 
