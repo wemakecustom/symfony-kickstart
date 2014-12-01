@@ -30,6 +30,8 @@ class AppKernel extends Kernel
             new WMC\DoctrineBundle\WMCDoctrineBundle,
 
             new WMC\DirectoryLoaderBundle\WMCDirectoryLoaderBundle,
+
+            new AppBundle\AppBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
