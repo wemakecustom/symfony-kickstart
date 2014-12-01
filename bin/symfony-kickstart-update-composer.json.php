@@ -49,6 +49,10 @@ $data["extra"]["symfony-assets-install"] = "relative";
 $data["extra"]["update-config-dirs"]["confs/dist"] = "confs";
 $data["extra"]["update-config-dirs"]["app/config/parameters/dist"] = "app/config/parameters/local";
 
+unset($data['require']['incenteev/composer-parameter-handler']);
+unset($data['extra']['incenteev-parameters']);
+
+
 $data["repositories"] = array(
     array(
         "packagist" => false,
