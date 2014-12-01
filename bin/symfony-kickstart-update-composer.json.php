@@ -15,9 +15,12 @@ $data = json_decode($json,true);
 
 foreach (array('post-install-cmd', 'post-update-cmd') as $event) {
     foreach ($data['scripts'][$event] as $i => $script) {
-        if ($script == 'Incenteev\ParameterHandler\ScriptHandler::buildParameters') {
-            unset($data['scripts'][$event][$i]);
-            break;
+        switch ($script) {
+            case 'Incenteev\ParameterHandler\ScriptHandler::buildParameters':
+            case 'WMC\Composer\Utils\ConfigFile\ConfigDir::updateDirs':
+            case 'WMC\AppLoader\ScriptHandler::buildParameters':
+                unset($data['scripts'][$event][$i]);
+                break;
         }
     }
 
@@ -46,9 +49,18 @@ $data["extra"]["symfony-assets-install"] = "relative";
 $data["extra"]["update-config-dirs"]["confs/dist"] = "confs";
 $data["extra"]["update-config-dirs"]["app/config/parameters/dist"] = "app/config/parameters/local";
 
-$data["repositories"][] = array(
-	"type" => "composer",
-	"url" => "http://gitlab-composer.stage.wemakecustom.com/"
+$data["repositories"] = array(
+    array(
+        "packagist" => false,
+    ),
+    array(
+        "type" => "composer",
+        "url"  => "http://gitlab-composer.stage.wemakecustom.com/",
+    ),
+    array(
+        "type" => "composer",
+        "url"  => "http://composer.wemakecustom.com/proxy/packagist",
+    ),
 );
 
 $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
