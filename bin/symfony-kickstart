@@ -1,5 +1,9 @@
 #!/bin/bash
 
+SYMFONY_VERSION="2.6"
+COMPOSER_REPOSITORY="http://composer.wemakecustom.com/proxy/packagist" # http://packagist.org
+WEB_DIRECTORY="htdocs"
+
 script_dir="$(cd "$(dirname "${BASH_SOURCE}")" ; pwd -P)"/"$(basename "${BASH_SOURCE}")"
 while [ -L "${script_dir}" ] ; do script_dir="$(dirname "${script_dir}")/$(readlink "${script_dir}")"; done
 script_dir="$(dirname "${script_dir}")"
@@ -13,7 +17,7 @@ fi
 
 symfony_install_dir="${symfony_install_dir%%/}"
 
-if [ -d "${symfony_install_dir}" ]
+if [ -e "${symfony_install_dir}/composer.json"  ]
 then
 	echo "The directory ${symfony_install_dir} already exists"
 	exit 0
@@ -29,7 +33,7 @@ if ! which $COMPOSER >/dev/null 2>/dev/null; then
 fi
 
 # Download and install Symfony
-$COMPOSER -n create-project symfony/framework-standard-edition "${symfony_install_dir}/" 2.4
+$COMPOSER create-project --repository-url "${COMPOSER_REPOSITORY}" symfony/framework-standard-edition "${symfony_install_dir}/" "${SYMFONY_VERSION}"
 
 # Cleanup demo dundle
 echo -n 'Cleanup demo bundle...'
@@ -40,11 +44,13 @@ echo 'Cleanup unused files...'
 rm -fv $symfony_install_dir/app/config/*.yml $symfony_install_dir/app/config/parameters.yml.dist
 
 # Copy kickstart files
-cp -r "${script_dir}/../dist/*" "${symfony_install_dir}"
+rsync -av "${script_dir}/../dist/" "${symfony_install_dir}/"
 
 # A bit of preparation
 cd "${symfony_install_dir}"
-mv web htdocs
+if [[ "${WEB_DIRECTORY}" != "web" ]]; then
+    mv web "${WEB_DIRECTORY}"
+fi
 
 # Update composer.json with some default values
 # Update composer.json with WMC's GitLab repo
@@ -56,10 +62,10 @@ $COMPOSER update
 
 # Install AppLoader
 cp vendor/wemakecustom/symfony-app-loader/app/console app/console
-cp vendor/wemakecustom/symfony-app-loader/web/app.php htdocs/app.php
-cp vendor/wemakecustom/symfony-app-loader/web/app_dev.php htdocs/app_dev.php
+cp vendor/wemakecustom/symfony-app-loader/web/app.php "${WEB_DIRECTORY}/app.php"
+cp vendor/wemakecustom/symfony-app-loader/web/app_dev.php "${WEB_DIRECTORY}/app_dev.php"
 
 # More cleanup
-rm -f htdocs/config.php
+rm -f "${WEB_DIRECTORY}/config.php"
 
 [ -z "${1}" ] && echo "You can now rename and move the ${symfony_install_dir} to fit your needs!"
