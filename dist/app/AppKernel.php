@@ -26,9 +26,10 @@ class AppKernel extends Kernel
 
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle,
 
+            new FOS\UserBundle\FOSUserBundle(),
+
             new WMC\CommonBundle\WMCCommonBundle,
             new WMC\DoctrineBundle\WMCDoctrineBundle,
-
             new WMC\DirectoryLoaderBundle\WMCDirectoryLoaderBundle,
 
             new AppBundle\AppBundle(),

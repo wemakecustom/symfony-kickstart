@@ -38,6 +38,7 @@ $data['require']['wemakecustom/symfony-app-loader'] = '~1.0';
 $data['require']['wemakecustom/composer-script-utils'] = '>=0.3';
 $data['require']['wemakecustom/directory-loader-bundle'] = '1.0.*@dev';
 $data['require']['stof/doctrine-extensions-bundle'] = '~1.1';
+$data['require']['friendsofsymfony/user-bundle'] = '~2.0';
 
 $data["minimum-stability"] = "dev";
 $data["prefer-stable"] = true;
