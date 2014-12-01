@@ -1,0 +1,54 @@
+{% extends "::base.auto.twig" %}
+
+{% block content %}
+
+    <div class="row">
+        {%- block main_block %}
+
+        <main id="main" role="main" class="col-md-9 clearfix">
+            {%- block main %}
+
+            <article class="{% block content_class %}{% endblock content_class %}">
+              <header class="header">
+                <h3>{% block page_title %}{{ block('title') }}{% endblock %}</h3>
+              </header>
+
+              {%- if block('page_header') %}
+
+              <div class="content-header">
+                {% block page_header %}{% endblock %}
+              </div>
+              {%- endif %}
+
+              <div class="content">
+                {%- block page_content %}{% endblock %}
+
+              </div>
+
+              {%- if block('page_footer') %}
+
+              <footer class="footer">
+                {% block page_footer %}{% endblock %}
+              </footer>
+              {%- endif %}
+
+            </article>
+            {%- endblock %}
+
+        </main>
+        {% endblock %}
+
+        {%- block sidebar_block %}
+
+        <aside id="sidebar" class="col-md-3 clearfix">
+            {% block sidebar %}
+            {% endblock %}
+
+        </aside>
+        {%- endblock %}
+
+    </div>
+
+{% block content_footer %}{% endblock %}
+
+{% endblock %}

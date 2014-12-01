@@ -1,0 +1,7 @@
+sp_bower:
+    install_on_warmup: true
+    bundles:
+        AppBundle:
+            asset_dir: %web_directory%/components
+    assetic:
+        enabled: false

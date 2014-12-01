@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+{% block html_tag -%}
+<html lang="{{ app.request.locale|split('_')[0] }}">
+{%- endblock html_tag %}
+
+  <head>
+    <meta charset="UTF-8">
+
+    <title>
+      {%- block head_title -%}
+        {%- set title_separator = title_separator|default(' • ') -%}
+        {%- block title %}Home{% endblock -%}
+        {%- if block('title') and block('site_title') %}{{ title_separator }}{% endif -%}
+        {%- block site_title %}My Site{% endblock -%}
+      {%- endblock -%}
+    </title>
+
+    {%- block head_meta %}
+
+
+    <!-- meta -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+
+    {%- if block('head_description') %}
+
+    <meta name="description" content="{%- block head_description -%}{%- endblock -%}">
+    {%- endif %}
+
+    {%- block og_meta %}
+
+    {%- block og_meta_global %}
+
+
+    <meta property="og:locale"      content="{{ app.request.locale }}">
+    {%- if facebook.appId is defined %}
+
+    <meta property="fb:app_id"      content="{{ facebook.appId }}">
+    {%- endif %}
+
+    <meta property="og:site_name"   content="{{ block('site_title') }}">
+    <meta property="og:title"       content="{{ block('head_title') }}">
+    <meta property="og:description" content="{{ block('head_description') }}">
+    <meta property="og:type"        content="{% block og_type %}website{% endblock %}">
+    {%- if block('head_canonical_url') %}
+
+    <meta property="og:url"         content="{{ block('head_canonical_url') }}">
+    {%- endif %}
+    {%- endblock og_meta_global %}
+
+    {%- block og_meta_specific %}
+
+    <meta property="og:image"       content="{{ app.request.getUriForPath('/') }}bundles/app/images/fb-share-default.png?{{ assets_version() }}">
+    {%- endblock og_meta_specific %}
+
+    {%- endblock og_meta %}
+
+    {%- endblock head_meta -%}
+
+    {%- block head_style %}
+
+
+    <!-- stylesheets -->
+    {%- block head_style_bootstrap -%}
+      {##
+       # Twitter Bootstrap CSS files
+       # debug = false to speed up generation in dev
+       # - Edit htdocs/less/bootstrap.less to load differents parts of Bootstrap
+       # - Edit htdocs/less/variables.less with your own variables
+       # @link https://github.com/phiamo/MopaBootstrapBundle/blob/master/Resources/doc/2-base-templates.md#usage
+       #}
+      {%- stylesheets
+        'bootstrap/bootstrap.less'
+        debug=false
+        output='assets/css/bootstrap.css'
+      %}
+
+    <link rel="stylesheet" href="{{ asset_url }}" media="screen">
+      {%- endstylesheets %}
+    {%- endblock -%}
+
+    {%- stylesheets
+      'bundles/app/less/common.less'
+      'bundles/app/less/layout.less'
+      output='assets/css/global.css'
+    %}
+
+    <link rel="stylesheet" href="{{ asset_url }}">
+    {%- endstylesheets %}
+
+    {%- stylesheets
+      'bundles/app/less/print.less'
+      output='assets/css/print.css'
+    %}
+
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="print">
+    {%- endstylesheets %}
+
+    <!--[if lte IE 8]>
+    {%- stylesheets
+      'bundles/app/less/ie.less'
+      output='assets/css/ie.css'
+    %}
+
+      <link rel="stylesheet" href="{{ asset_url }}" type="text/css">
+    {%- endstylesheets %}
+
+    <![endif]-->
+
+    {%- endblock head_style %}
+
+
+    {%- block head_link %}
+
+
+    <!-- links -->
+    <link rel="shortcut icon"    href="{{ app.request.baseURL }}/favicon.ico">
+    <link rel="apple-touch-icon" href="{{ app.request.baseURL }}/apple-touch-icon.png">
+    <link rel="apple-touch-icon" href="{{ app.request.baseURL }}/apple-touch-icon-72x72.png" sizes="72x72">
+    <link rel="apple-touch-icon" href="{{ app.request.baseURL }}/apple-touch-icon-114x114.png" sizes="114x114">
+    {%- if block('head_canonical_url') %}
+
+    <link rel="canonical"        href="{% block head_canonical_url %}{{ app.request.uri }}{% endblock %}">
+    {%- endif %}
+
+    {%- endblock %}
+    {% if block('head_script') %}
+
+
+    <!-- scripts -->
+    {%- block head_script %}
+
+    {%- endblock head_script %}
+    {% endif %}
+
+    <!--[if lte IE 8]>
+      {%- javascripts
+        'components/html5shiv/dist/html5shiv.js'
+        output='assets/js/ie8.js'
+      %}
+
+      <script type="text/javascript" src="{{ asset_url }}"></script>
+      {%- endjavascripts %}
+
+      <script src="{{ app.request.baseURL }}/components/respond/respond.min.js?{{ assets_version() }}"></script>
+      <link href="{{ asset('components/respond/cross-domain/respond-proxy.html')|replace({("?" ~ assets_version()): ""}) }}" id="respond-proxy" rel="respond-proxy">
+      <link href="{{ app.request.baseURL }}/components/respond/cross-domain/respond.proxy.gif?{{ assets_version() }}" id="respond-redirect" rel="respond-redirect">
+      <script src="{{ app.request.baseURL }}/components/respond/cross-domain/respond.proxy.js?{{ assets_version() }}"></script>
+    <![endif]-->
+  </head>
+
+{% block body_block %}
+
+  {%- block body_tag -%}
+<body class="{{ (format|default(app.request.requestFormat|default("html"))) }} {% block body_class %}{% endblock %}">
+{%- endblock body_tag %}
+
+  {%- block body %}
+
+    {%- block page_header_block %}
+
+    <div id="header" class="container" role="banner">
+      <div class="row">
+        {%- block page_header_logo %}
+
+        <div id="logo-wrapper" class="col-sm-3">
+          <a href="{{ path('home') }}" title="Accueil" rel="home" id="logo" class="img-responsive">
+            <img alt="" src="{{ asset('apple-touch-icon.png') }}" class="img-responsive">
+          </a>
+        </div>
+        {%- endblock %}
+
+      </div>
+    </div>
+    {%- endblock %}
+
+    {%- block session_flash_block %}
+
+
+    <div id="session-flash" class="alert-container container">
+        {%- block flash_alerts %}
+          {%- if app.session.flashbag.peekAll|length > 0 %}
+            {{- dump(app.session.flashBag) }}
+          {%- endif -%}
+        {%- endblock %}
+
+    </div>
+
+    {% endblock -%}
+
+    {% block content_block -%}
+    <section id="content" class="container">
+      {% block content %}{% block main %}{% block page_content %}{% endblock %}{% endblock %}{% endblock %}
+    </section>
+    {%- endblock content_block %}
+
+    {% block footer_block -%}
+    <footer id="footer">
+      Footer
+    </footer>
+    {%- endblock footer_block %}
+
+  {%- endblock body %}
+
+  {%- block foot_script %}
+
+
+  <!-- scripts -->
+  {#-
+    'components/bootstrap/js/tab.js'
+    'components/bootstrap/js/button.js'
+    'components/bootstrap/js/modal.js'
+    'components/bootstrap/js/alert.js'
+    'components/bootstrap/js/dropdown.js'
+    'components/bootstrap/js/tooltip.js'
+    'components/bootstrap/js/popover.js'
+    'components/bootstrap/js/transition.js'
+    'components/bootstrap/js/collapse.js'
+    'components/bootstrap/js/carousel.js'  
+  #}
+  {%- javascripts
+    'components/jquery/jquery.js'
+    'components/jquery/jquery-migrate.js'
+    'components/console-polyfill/index.js'
+    'bundles/fosjsrouting/js/router.js'
+
+    debug=false
+    output='assets/js/libs.js'
+  %}
+
+  <script src="{{ asset_url }}"></script>
+    {%- endjavascripts %}
+
+  {%- javascripts
+    'assets/js/routes.js'
+    'bundles/app/js/global.js'
+    output='assets/js/global.js'
+  %}
+
+  <script src="{{ asset_url }}"></script>
+  {%- endjavascripts %}
+
+  {%- endblock foot_script %}
+{%- endblock body_block %}
+
+  </body>
+</html>
