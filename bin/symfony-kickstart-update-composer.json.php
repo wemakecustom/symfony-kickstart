@@ -64,7 +64,7 @@ $data["repositories"] = array(
     ),
     array(
         "type" => "composer",
-        "url"  => "http://packagist.wemakecustom.com/",
+        "url"  => "http://composer.wemakecustom.com/proxy/packagist/",
     ),
 );
 
