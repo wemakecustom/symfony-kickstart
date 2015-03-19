@@ -1,6 +1,5 @@
 #!/bin/bash
 
-SYMFONY_VERSION="2.6"
 COMPOSER_REPOSITORY="http://composer.wemakecustom.com/proxy/packagist" # http://packagist.org
 WEB_DIRECTORY="htdocs"
 
@@ -32,8 +31,17 @@ if ! which $COMPOSER >/dev/null 2>/dev/null; then
     exit 1
 fi
 
+# Detect symfony executable name
+SYMFONY="symfony.phar"
+
+which $SYMFONY >/dev/null 2>/dev/null || SYMFONY="symfony"
+if ! which $SYMFONY >/dev/null 2>/dev/null; then
+    echo "Symfony missing" >&2
+    exit 1
+fi
+
 # Download and install Symfony
-$COMPOSER create-project --repository-url "${COMPOSER_REPOSITORY}" symfony/framework-standard-edition "${symfony_install_dir}/" "${SYMFONY_VERSION}"
+"${SYMFONY}" new "${symfony_install_dir}/"
 
 # Cleanup demo dundle
 echo -n 'Cleanup demo bundle...'
