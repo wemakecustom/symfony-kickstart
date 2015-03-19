@@ -41,7 +41,14 @@ if ! which $SYMFONY >/dev/null 2>/dev/null; then
 fi
 
 # Download and install Symfony
-"${SYMFONY}" new "${symfony_install_dir}/"
+if [ "$(dirname "${symfony_install_dir}")" != "." ]
+then
+    [ -d "$(dirname "${symfony_install_dir}")" ] || mkdir "$(dirname "${symfony_install_dir}")"
+    cd "$(dirname "${symfony_install_dir}")"
+    "${SYMFONY}" new "$(basename "${symfony_install_dir}")"
+else
+    "${SYMFONY}" new "${symfony_install_dir}/"
+fi
 
 # Cleanup demo dundle
 echo -n 'Cleanup demo bundle...'
