@@ -56,15 +56,8 @@ unset($data['extra']['incenteev-parameters']);
 
 $data["repositories"] = array(
     array(
-        "packagist" => false,
-    ),
-    array(
         "type" => "composer",
         "url"  => "http://gitlab-composer.stage.wemakecustom.com/",
-    ),
-    array(
-        "type" => "composer",
-        "url"  => "http://composer.wemakecustom.com/proxy/packagist/",
     ),
 );
 
