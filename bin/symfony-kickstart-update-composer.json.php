@@ -30,7 +30,7 @@ foreach (array('post-install-cmd', 'post-update-cmd') as $event) {
 
 $data['require']['symfony2-bundles/wmccommonbundle'] = '*';
 $data['require']['symfony2-bundles/wmcdoctrinebundle'] = '*';
-$data['require']['sp/bower-bundle'] = 'dev-master';
+$data['require']['sp/bower-bundle'] = '=0.11';
 $data['require']['jms/di-extra-bundle'] = '1.x';
 $data['require']['jms/security-extra-bundle'] = '1.x';
 
@@ -38,7 +38,7 @@ $data['require']['wemakecustom/symfony-app-loader'] = '~1.0';
 $data['require']['wemakecustom/composer-script-utils'] = '>=0.3';
 $data['require']['wemakecustom/directory-loader-bundle'] = '1.0.*@dev';
 $data['require']['stof/doctrine-extensions-bundle'] = '~1.1';
-$data['require']['friendsofsymfony/user-bundle'] = '~2.0';
+$data['require']['friendsofsymfony/user-bundle'] = 'dev-master';
 
 $data["minimum-stability"] = "dev";
 $data["prefer-stable"] = true;
