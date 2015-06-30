@@ -1,0 +1,4 @@
+wmc_doctrine:
+  orm:
+    naming_strategy: true
+  debug_helper: %kernel.debug%
