@@ -52,11 +52,14 @@ fi
 
 # Cleanup demo dundle
 echo -n 'Cleanup demo bundle...'
-rm -rf "${symfony_install_dir}/web/bundles/acmedemo" "${symfony_install_dir}/src/Acme"
+rm -rf "${symfony_install_dir}/web/bundles/acmedemo" \
+   "${symfony_install_dir}/src/Acme"
 
 # Cleanup unused files
 echo 'Cleanup unused files...'
-rm -fv $symfony_install_dir/app/config/*.yml $symfony_install_dir/app/config/parameters.yml.dist
+rm -fv "${symfony_install_dir}/app/config"/*.yml \
+   "${symfony_install_dir}/app/config/parameters.yml.dist" \
+   "${symfony_install_dir}/app/Resources/views/default/index.html.twig"
 
 # Copy kickstart files
 rsync -av "${script_dir}/../dist/" "${symfony_install_dir}/"
