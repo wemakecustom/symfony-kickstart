@@ -1,2 +1,3 @@
 parameters:
     locale: fr_CA
+    default_locale: fr_CA
