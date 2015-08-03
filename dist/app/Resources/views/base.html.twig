@@ -180,7 +180,7 @@
     <div id="session-flash" class="alert-container container">
         {%- block flash_alerts %}
           {%- if app.session.flashbag.peekAll|length > 0 %}
-            {{- dump(app.session.flashBag) }}
+             {% if app.debug %}{% include '::debug-flash.html.twig' %}{% endif %}
           {%- endif -%}
         {%- endblock %}
 
