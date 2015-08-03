@@ -1,54 +1,154 @@
 {% extends "::base.auto.twig" %}
 
-{% block content %}
+{%- block head_style %}
 
-    <div class="row">
-        {%- block main_block %}
+    <!-- stylesheets -->
+    {%- stylesheets
+        'bootstrap/bootstrap.less'
+        output='assets/css/bootstrap.css'
+    %}
 
-        <main id="main" role="main" class="col-md-9 clearfix">
-            {%- block main %}
+    <link rel="stylesheet" href="{{ asset_url }}">
+    {%- endstylesheets %}
 
-            <article class="{% block content_class %}{% endblock content_class %}">
-              <header class="header">
-                <h3>{% block page_title %}{{ block('title') }}{% endblock %}</h3>
-              </header>
+    {%- stylesheets
+        'bundles/app/less/common.less'
+        'bundles/app/less/layout.less'
+        output='assets/css/global.css'
+    %}
 
-              {%- if block('page_header') %}
+    <link rel="stylesheet" href="{{ asset_url }}">
+    {%- endstylesheets %}
 
-              <div class="content-header">
-                {% block page_header %}{% endblock %}
-              </div>
-              {%- endif %}
+    {%- stylesheets
+        'bundles/app/less/print.less'
+        output='assets/css/print.css'
+    %}
 
-              <div class="content">
-                {%- block page_content %}{% endblock %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="print">
+    {%- endstylesheets %}
 
-              </div>
+    <!--[if lte IE 8]>
+    {%- stylesheets
+        'bundles/app/less/ie.less'
+        output='assets/css/ie8.css'
+    %}
 
-              {%- if block('page_footer') %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css">
+    {%- endstylesheets %}
+    <![endif]-->
 
-              <footer class="footer">
-                {% block page_footer %}{% endblock %}
-              </footer>
-              {%- endif %}
+{%- endblock head_style %}
 
-            </article>
+
+{%- block head_script %}
+    
+    <!-- script -->
+    {%- javascripts
+        'assets/js/routes.js'
+        'bundles/app/js/*'
+        output='assets/js/global.js'
+    %}
+
+    <script src="{{ asset_url }}"></script>
+    {%- endjavascripts %}
+
+    <!--[if lte IE 8]>
+    {%- javascripts
+        'components/html5shiv/dist/html5shiv.js'
+        output='assets/js/ie8.js'
+    %}
+    
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {%- endjavascripts %}
+
+    <script src="{{ app.request.baseURL }}/components/respond/respond.min.js?{{ assets_version() }}"></script>
+    <link href="{{ asset('components/respond/cross-domain/respond-proxy.html')|replace({("?" ~ assets_version()): ""}) }}" id="respond-proxy" rel="respond-proxy">
+    <link href="{{ app.request.baseURL }}/components/respond/cross-domain/respond.proxy.gif?{{ assets_version() }}" id="respond-redirect" rel="respond-redirect">
+    <script src="{{ app.request.baseURL }}/components/respond/cross-domain/respond.proxy.js?{{ assets_version() }}"></script>
+    <![endif]-->
+
+{%- endblock head_script %}
+
+
+{%- block foot_script %}
+
+    <!-- scripts -->
+    {%- javascripts
+        'components/jquery/jquery.js'
+        'components/jquery/jquery-migrate.js'
+        'components/console-polyfill/index.js'
+        'components/underscore/underscore-min.js'
+        'bundles/fosjsrouting/js/router.js'
+        debug=false
+        output='assets/js/libs.js'
+    %}
+
+    <script src="{{ asset_url }}"></script>
+    {%- endjavascripts %}
+
+    {%- javascripts
+        'components/bootstrap/js/tab.js'
+        'components/bootstrap/js/button.js'
+        'components/bootstrap/js/modal.js'
+        'components/bootstrap/js/alert.js'
+        'components/bootstrap/js/dropdown.js'
+        'components/bootstrap/js/tooltip.js'
+        'components/bootstrap/js/popover.js'
+        'components/bootstrap/js/transition.js'
+        'components/bootstrap/js/collapse.js'
+        'components/bootstrap/js/carousel.js'
+        output='assets/js/bootstrap.js'
+    %}
+
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {%- endjavascripts %}
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+
+{%- endblock foot_script %}
+
+
+
+{%- block body %}
+
+    {%- block header_block %}
+    <header id="header" class="container-fluid" role="banner">
+        {% block header_content %}{% endblock %}
+    </header>
+    {%- endblock %}
+
+    {%- block session_flash_block %}
+    <div id="session-flash" class="alert-container container-fluid">
+        {%- block flash_alerts %}
+            {%- if app.session.flashbag.peekAll|length > 0 %}
+                {% if app.debug %}{% include '::debug-flash.html.twig' %}{% endif %}
+            {%- endif -%}
+        {%- endblock %}
+    </div>
+    {% endblock -%}
+
+    {% block content_block -%}
+    <section id="content" class="container-fluid">
+        {% block content %}
+
+            {%- block main %}{% endblock %}
+
+            {%- block sidebar_block %}
+            <aside id="sidebar" class="col-md-3 clearfix">
+                {% block sidebar_content %}{% endblock %}
+            </aside>
             {%- endblock %}
 
-        </main>
         {% endblock %}
+    </section>
+    {%- endblock content_block %}
 
-        {%- block sidebar_block %}
+    {% block footer_block -%}
+    <footer id="footer" class="container-fluid" >
+        {% block footer_content %}{% endblock %}
+    </footer>
+    {%- endblock footer_block %}
 
-        <aside id="sidebar" class="col-md-3 clearfix">
-            {% block sidebar %}
-            {% endblock %}
-
-        </aside>
-        {%- endblock %}
-
-    </div>
-
-{% block content_footer %}{% endblock %}
-
-{% endblock %}
+{%- endblock body %}
