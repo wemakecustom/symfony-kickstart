@@ -1,6 +1,6 @@
 framework:
     #esi:             ~
-    translator:      { fallback: %locale% }
+    translator:      { fallback: %fallback_locale% }
     secret:          %secret%
     router:
         resource: "%kernel.root_dir%/config/routing/common/"
