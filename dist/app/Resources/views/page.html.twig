@@ -7,7 +7,13 @@
         'bootstrap/bootstrap.less'
         output='assets/css/bootstrap.css'
     %}
+    <link rel="stylesheet" href="{{ asset_url }}">
+    {%- endstylesheets %}
 
+    {%- stylesheets
+        'font-awesome/less/font-awesome.less'
+        output='assets/css/libs.css'
+    %}
     <link rel="stylesheet" href="{{ asset_url }}">
     {%- endstylesheets %}
 
@@ -16,7 +22,6 @@
         'bundles/app/less/layout.less'
         output='assets/css/global.css'
     %}
-
     <link rel="stylesheet" href="{{ asset_url }}">
     {%- endstylesheets %}
 
@@ -24,7 +29,6 @@
         'bundles/app/less/print.less'
         output='assets/css/print.css'
     %}
-
     <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="print">
     {%- endstylesheets %}
 
@@ -33,13 +37,11 @@
         'bundles/app/less/ie.less'
         output='assets/css/ie8.css'
     %}
-
     <link rel="stylesheet" href="{{ asset_url }}" type="text/css">
     {%- endstylesheets %}
     <![endif]-->
 
 {%- endblock head_style %}
-
 
 {%- block head_script %}
     
@@ -49,7 +51,6 @@
         'bundles/app/js/*'
         output='assets/js/global.js'
     %}
-
     <script src="{{ asset_url }}"></script>
     {%- endjavascripts %}
 
@@ -58,10 +59,8 @@
         'components/html5shiv/dist/html5shiv.js'
         output='assets/js/ie8.js'
     %}
-    
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {%- endjavascripts %}
-
     <script src="{{ app.request.baseURL }}/components/respond/respond.min.js?{{ assets_version() }}"></script>
     <link href="{{ asset('components/respond/cross-domain/respond-proxy.html')|replace({("?" ~ assets_version()): ""}) }}" id="respond-proxy" rel="respond-proxy">
     <link href="{{ app.request.baseURL }}/components/respond/cross-domain/respond.proxy.gif?{{ assets_version() }}" id="respond-redirect" rel="respond-redirect">
@@ -69,7 +68,6 @@
     <![endif]-->
 
 {%- endblock head_script %}
-
 
 {%- block foot_script %}
 
@@ -79,36 +77,32 @@
         'components/jquery/jquery-migrate.js'
         'components/console-polyfill/index.js'
         'components/underscore/underscore-min.js'
-        'bundles/fosjsrouting/js/router.js'
         debug=false
         output='assets/js/libs.js'
     %}
-
     <script src="{{ asset_url }}"></script>
-    {%- endjavascripts %}
-
-    {%- javascripts
-        'components/bootstrap/js/tab.js'
-        'components/bootstrap/js/button.js'
-        'components/bootstrap/js/modal.js'
-        'components/bootstrap/js/alert.js'
-        'components/bootstrap/js/dropdown.js'
-        'components/bootstrap/js/tooltip.js'
-        'components/bootstrap/js/popover.js'
-        'components/bootstrap/js/transition.js'
-        'components/bootstrap/js/collapse.js'
-        'components/bootstrap/js/carousel.js'
-        output='assets/js/bootstrap.js'
-    %}
-
-    <script type="text/javascript" src="{{ asset_url }}"></script>
     {%- endjavascripts %}
 
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
 
-{%- endblock foot_script %}
+    {%- javascripts
+        'components/bootstrap/js/alert.js'
+        'components/bootstrap/js/button.js'
+        'components/bootstrap/js/carousel.js'
+        'components/bootstrap/js/collapse.js'
+        'components/bootstrap/js/dropdown.js'
+        'components/bootstrap/js/modal.js'
+        'components/bootstrap/js/popover.js'
+        'components/bootstrap/js/tab.js'
+        'components/bootstrap/js/tooltip.js'
+        'components/bootstrap/js/transition.js'
+        output='assets/js/bootstrap.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {%- endjavascripts %}
 
+{%- endblock foot_script %}
 
 
 {%- block body %}
