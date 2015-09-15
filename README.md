@@ -103,3 +103,14 @@ Take a look to http://gitlab.wemakecustom.com/tcfj/mon-conseil
 ## TODO:
 
   * Add a link to each bundle git repo/documentation in the Commonly used list
+
+
+## Commonly bower install
+
+* jquery 2.0+ 
+* jquery-migrate
+* console-polyfill    :  Adds no-operation **console methods** to environments where console is not available.
+* underscore          :  Provides a whole mess of useful functional programming helpers.
+* font-awesome
+* html5shiv           :  Enables use of **HTML5** sectioning elements in legacy IE and provides basic HTML5 styling.
+* respond             :  A fast & lightweight polyfill for min/max-width CSS3 **Media Queries** (for IE 6-8, and more).
