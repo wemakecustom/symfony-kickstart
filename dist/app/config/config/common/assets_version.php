@@ -10,8 +10,7 @@
  */
 
 $container->loadFromExtension('framework', array(
-    'templating'      => array(
-        'engines' => array('twig'),
-        'assets_version' => base_convert(time(), 10, 36), // ex: muw6vx
+    'assets'      => array(
+        'version' => base_convert(time(), 10, 36), // ex: muw6vx
     ),
 ));
