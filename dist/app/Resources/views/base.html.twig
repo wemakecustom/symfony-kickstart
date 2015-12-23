@@ -16,7 +16,6 @@
     </title>
 
 
-
     {%- block head_meta %}
     <!-- meta -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -58,22 +57,19 @@
     {%- endblock head_meta -%}
 
 
-
     {%- block head_style %}{%- endblock head_style %}
-
 
 
     {%- block head_link %}
     <!-- links -->
-    <link rel="shortcut icon"    href="{{ app.request.baseURL }}/favicon.ico">
-    <link rel="apple-touch-icon" href="{{ app.request.baseURL }}/apple-touch-icon.png">
-    <link rel="apple-touch-icon" href="{{ app.request.baseURL }}/apple-touch-icon-72x72.png" sizes="72x72">
-    <link rel="apple-touch-icon" href="{{ app.request.baseURL }}/apple-touch-icon-114x114.png" sizes="114x114">
+    <link rel="shortcut icon"       href="{{ app.request.baseURL }}/favicon.ico">
+    <link rel="apple-touch-icon"    href="{{ app.request.baseURL }}/apple-touch-icon.png">
+    <link rel="apple-touch-icon"    href="{{ app.request.baseURL }}/apple-touch-icon-72x72.png" sizes="72x72">
+    <link rel="apple-touch-icon"    href="{{ app.request.baseURL }}/apple-touch-icon-114x114.png" sizes="114x114">
     {%- if block('head_canonical_url') %}
-    <link rel="canonical"        href="{% block head_canonical_url %}{{ app.request.uri }}{% endblock %}">
+    <link rel="canonical"           href="{% block head_canonical_url %}{{ app.request.uri }}{% endblock %}">
     {%- endif %}
     {%- endblock %}
-
 
 
     {% if block('head_script') %}
@@ -89,11 +85,11 @@
 {%- endblock body_tag %}
 
 
-    {%- block body %}
+    {%- block body -%}
         {%- block content -%}
             {%- block main -%}{%- endblock -%}
         {%- endblock content -%}
-    {%- endblock body %}
+    {%- endblock -%}
 
 
     {%- block foot_script %}{%- endblock foot_script %}
